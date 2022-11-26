@@ -3,9 +3,12 @@ package com.yeogida.yeogidaProto.global.oauth;
 import com.yeogida.yeogidaProto.domain.member.entity.Member;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
+import java.util.HashMap;
 import java.util.Map;
 
+@ToString
 @Getter
 public class OAuthAttributes {
     private Map<String, Object> attributes;
@@ -67,5 +70,16 @@ public class OAuthAttributes {
 
     public Member toEntity() {
         return new Member(email, nickname, profileImgUrl);
+    }
+
+    Map<String, Object> convertToMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", nameAttributeKey);
+        map.put("key", nameAttributeKey);
+        map.put("email", email);
+        map.put("nickname", nickname);
+        map.put("profileImgUrl", profileImgUrl);
+
+        return map;
     }
 }
